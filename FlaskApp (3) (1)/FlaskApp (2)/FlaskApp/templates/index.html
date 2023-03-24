@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+
+    
+    
+     <!--Daisyuicdn-->
+    
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.47.0/dist/full.css" rel="stylesheet" type="text/css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dashboard</title>
+  
+</head>
+<body>
+
+    <header>
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+              <a class="btn btn-ghost normal-case text-xl" href="{{ url_for('index') }}">HAWK</a>
+            </div>
+            <div class="flex-none gap-2">
+              <div class="form-control">
+                <form class="search-form" action = "/search" method="POST">
+                <input type="text" placeholder="Search for Event ID:" name="event_id" id="event_id" class="input input-bordered" />
+                </form>
+              </div>
+              <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                  <div class="w-10 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-sentry" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6f32be" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18a1.93 1.93 0 0 0 .306 1.076a2 2 0 0 0 1.584 .924c.646 .033 -.537 0 .11 0h3a4.992 4.992 0 0 0 -3.66 -4.81c.558 -.973 1.24 -2.149 2.04 -3.531a8.997 8.997 0 0 1 5.62 8.341h4c.663 0 2.337 .005 3 0a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-1.84 3.176c4.482 2.05 7.6 6.571 7.6 11.824" />
+                      </svg>
+            <path d="M3 18a1.93 1.93 0 0 0 .306 1.076a2 2 0 0 0 1.584 .924c.646 .033 -.537 0 .11 0h3a4.992 4.992 0 0 0 -3.66 -4.81c.558 -.973 1.24 -2.149 2.04 -3.531a8.997 8.997 0 0 1 5.62 8.341h4c.663 0 2.337 .005 3 0a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-1.84 3.176c4.482 2.05 7.6 6.571 7.6 11.824" />
+          </svg>
+                  </div>
+                </label>
+                <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                  <li>
+                    <a class="justify-between">
+                      
+                        <a class="nav-link" href="{{ url_for('index') }}"><span class="badge">Home</span></a> 
+                    </a>
+                  </li>
+                  <li><a class="nav-link" href="#">Event Details</a></li>
+                  <li><a class="nav-link" href="{{ url_for('alerts') }}">Alerts</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    </header>
+    
+    
+<!--carousel-->
+
+
+<div class="carousel w-full">
+    <div id="item1" class="carousel-item w-full">
+      <div id="piechart1"  class="w-full"></div>
+    </div> 
+    <div id="item2" class="carousel-item w-full">
+        <div id="piechart2"  class="w-full"></div>
+    </div> 
+    <div id="item3" class="carousel-item w-full">
+        <div id="piechart3"  class="w-full"></div>
+    </div> 
+    
+  </div> 
+  <div class="flex justify-center w-full py-2 gap-2">
+    <a href="#item1" class="btn btn-xs">1</a> 
+    <a href="#item2" class="btn btn-xs">2</a> 
+    <a href="#item3" class="btn btn-xs">3</a> 
+  </div>
+
+
+
+ <script>
+             var chart_data1 = JSON.parse('{{ chart1|safe }}');
+             Plotly.newPlot('piechart1', chart_data1);
+            var chart_data2 = JSON.parse('{{ chart2|safe }}');
+            Plotly.newPlot('piechart2', chart_data2);
+            var chart_data3 = JSON.parse('{{ chart3|safe }}');
+            Plotly.newPlot('piechart3', chart_data3);
+</script>
+
+
+
+
+
+
+</body>
+</html>
